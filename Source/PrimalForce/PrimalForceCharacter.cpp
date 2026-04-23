@@ -65,10 +65,25 @@ void APrimalForceCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APrimalForceCharacter::Look);
+		// Shooting
+		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Triggered, this, &APrimalForceCharacter::Shoot);
 	}
 	else
 	{
 		UE_LOG(LogPrimalForce, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
+	}
+}
+
+void APrimalForceCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	//GetMesh()->HideBoneByName("gun", EPhysBodyOp::PBO_None);
+	currentGun = GetWorld()->SpawnActor<AGun>(gunClass);
+
+	if (currentGun) {
+		currentGun->SetOwner(this);
+		currentGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("gunSocket"));
+		currentGun->ownerController = GetController();
 	}
 }
 
@@ -88,6 +103,11 @@ void APrimalForceCharacter::Look(const FInputActionValue& Value)
 
 	// route the input
 	DoLook(LookAxisVector.X, LookAxisVector.Y);
+}
+
+void APrimalForceCharacter::Shoot(const FInputActionValue& Value)
+{
+	currentGun->PullTrigger();
 }
 
 void APrimalForceCharacter::DoMove(float Right, float Forward)

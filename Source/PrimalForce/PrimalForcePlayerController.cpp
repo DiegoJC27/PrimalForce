@@ -31,6 +31,9 @@ void APrimalForcePlayerController::BeginPlay()
 		}
 
 	}
+
+	HUDWidget = CreateWidget<UPlayerHUD>(this, HUDClass);
+	HUDWidget->AddToViewport();
 }
 
 void APrimalForcePlayerController::SetupInputComponent()

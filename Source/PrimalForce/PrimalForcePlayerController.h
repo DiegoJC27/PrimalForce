@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "PlayerHUD.h"
 #include "GameFramework/PlayerController.h"
 #include "PrimalForcePlayerController.generated.h"
 
@@ -41,4 +42,9 @@ protected:
 	/** Input mapping context setup */
 	virtual void SetupInputComponent() override;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UPlayerHUD> HUDClass;
+
+	UPROPERTY(VisibleAnywhere)
+	UPlayerHUD* HUDWidget;
 };
