@@ -5,4 +5,5 @@
 
 void ABulletGun::PullTrigger()
 {
+	UE_LOG(LogTemp, Display, TEXT("Se llama PullTrigger"));
 }

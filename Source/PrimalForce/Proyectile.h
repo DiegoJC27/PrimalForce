@@ -19,7 +19,12 @@ public:
 	USceneComponent* rootComp;
 
 	UPROPERTY(VisibleAnywhere)
-	USkeletalMeshComponent* skMeshComp;
+	UStaticMeshComponent* stMeshComp;
+
+	UPROPERTY(EditAnywhere)
+	float speed;
+	UPROPERTY(EditAnywhere)
+	int damage;
 
 protected:
 	// Called when the game starts or when spawned

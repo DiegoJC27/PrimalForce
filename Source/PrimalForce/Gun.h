@@ -22,6 +22,7 @@ public:
 
 	AController* ownerController;
 
+	UFUNCTION(BlueprintCallable)
 	virtual void PullTrigger();
 
 protected:

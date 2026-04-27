@@ -11,8 +11,8 @@ AProyectile::AProyectile()
 	rootComp = CreateDefaultSubobject<USceneComponent>(TEXT("Scene Root"));
 	SetRootComponent(rootComp);
 
-	skMeshComp = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
-	skMeshComp->SetupAttachment(rootComp);
+	stMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	stMeshComp->SetupAttachment(rootComp);
 }
 
 // Called when the game starts or when spawned
