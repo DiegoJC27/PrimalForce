@@ -18,16 +18,18 @@ UActorPool::UActorPool()
 void UActorPool::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (actorTemplate == nullptr || defaultSize <= 0)
+	UE_LOG(LogTemp, Warning, TEXT("Entra begin play"));
+	ForceInitialize();
+	/*if (actorTemplate == nullptr || defaultSize <= 0)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("La bala es nula"));
 		return;
 	}
 
 	for (int i = 0; i < defaultSize; i++)
 	{
 		InstancePoolActor(actorTemplate);
-	}
+	}*/
 
 }
 
@@ -68,6 +70,20 @@ void UActorPool::HideActor(AActor* actorToHide, bool isHidden)
 	UActorUtilities::ToggleActorHidden(actorToHide, isHidden);
 }
 
+
+void UActorPool::ForceInitialize()
+{
+	if (actorTemplate == nullptr || defaultSize <= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("La bala es nula"));
+		return;
+	}
+
+	for (int i = 0; i < defaultSize; i++)
+	{
+		InstancePoolActor(actorTemplate);
+	}
+}
 
 // Called every frame
 void UActorPool::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

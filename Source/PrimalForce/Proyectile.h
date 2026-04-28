@@ -15,7 +15,7 @@ public:
 	// Sets default values for this actor's properties
 	AProyectile();
 	
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	USceneComponent* rootComp;
 
 	UPROPERTY(VisibleAnywhere)
@@ -25,6 +25,9 @@ public:
 	float speed;
 	UPROPERTY(EditAnywhere)
 	int damage;
+
+	UPROPERTY(EditAnywhere)
+	float rockLifeSpan;
 
 protected:
 	// Called when the game starts or when spawned

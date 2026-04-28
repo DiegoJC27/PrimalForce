@@ -14,6 +14,10 @@ AGun::AGun()
 
 	skMeshComp = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
 	skMeshComp->SetupAttachment(rootComp);
+
+	muzzle = CreateDefaultSubobject<USceneComponent>(TEXT("BulletSpawnPoin"));
+	muzzle->SetupAttachment(skMeshComp);
+
 }
 
 void AGun::PullTrigger()

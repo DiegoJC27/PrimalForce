@@ -29,13 +29,14 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
 	AActor* InstancePoolActor(TSubclassOf<AActor> actorReference); //función para instancear actores
+
 	AActor* FindFirstAvailableActor(); //Regresa el primer actor desactivado que encuentre.
 	void HideActor(AActor* actorToHide, bool isHidden);
 
 public:
 	// Called every frame
+	void ForceInitialize();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable)

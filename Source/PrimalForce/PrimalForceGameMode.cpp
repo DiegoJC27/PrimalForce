@@ -4,5 +4,16 @@
 
 APrimalForceGameMode::APrimalForceGameMode()
 {
-	// stub
+	ActorPool_Proyectiles = CreateDefaultSubobject<UActorPool>(TEXT("PoolRocas"));
+	ActorPool_Proyectiles->RegisterComponent();
+}
+
+void APrimalForceGameMode::BeginPlay()
+{
+	if (ActorPool_Proyectiles != nullptr) {
+		UE_LOG(LogTemp, Warning, TEXT("No es nulo"));
+		ActorPool_Proyectiles->ForceInitialize();
+	}
+
+
 }

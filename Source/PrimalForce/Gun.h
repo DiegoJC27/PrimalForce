@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "IPooled.h"
 #include "GameFramework/Actor.h"
 #include "Gun.generated.h"
 
@@ -24,6 +25,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	virtual void PullTrigger();
+	UPROPERTY(VisibleAnywhere)
+	USceneComponent* muzzle;
 
 protected:
 	// Called when the game starts or when spawned

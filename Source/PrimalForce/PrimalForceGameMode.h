@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ActorPool.h"
 #include "GameFramework/GameModeBase.h"
 #include "PrimalForceGameMode.generated.h"
 
@@ -18,6 +19,12 @@ public:
 	
 	/** Constructor */
 	APrimalForceGameMode();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UActorPool* ActorPool_Proyectiles;
+
+protected:
+	virtual void BeginPlay() override;
 };
 
 

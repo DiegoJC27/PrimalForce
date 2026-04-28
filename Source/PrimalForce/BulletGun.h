@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ActorPool.h"
+#include "PrimalForceGameMode.h"
 #include "Gun.h"
 #include "BulletGun.generated.h"
 
@@ -17,4 +19,9 @@ public:
 
 	virtual void PullTrigger() override;
 	
+	UPROPERTY(VisibleAnywhere)
+	UActorPool* myRockPool;
+
+protected:
+	virtual void BeginPlay() override;
 };
