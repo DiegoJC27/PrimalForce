@@ -65,6 +65,7 @@ AActor* UActorPool::FindFirstAvailableActor()
 
 void UActorPool::HideActor(AActor* actorToHide, bool isHidden)
 {
+	UActorUtilities::ToggleActorHidden(actorToHide, isHidden);
 }
 
 

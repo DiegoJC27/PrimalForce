@@ -14,6 +14,7 @@ class PRIMALFORCE_API UActorUtilities : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 	
+public: 
 	UFUNCTION(BlueprintCallable)
 	static void ToggleActorHidden(AActor* actorToHide, bool isHidden);
 

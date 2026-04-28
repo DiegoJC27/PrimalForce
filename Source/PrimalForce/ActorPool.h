@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ActorUtilities.h"
 #include "Components/ActorComponent.h"
 #include "ActorPool.generated.h"
 
