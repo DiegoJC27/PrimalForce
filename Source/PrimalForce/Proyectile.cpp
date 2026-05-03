@@ -19,6 +19,7 @@ AProyectile::AProyectile()
 void AProyectile::BeginPlay()
 {
 	Super::BeginPlay();
+
 	
 }
 
