@@ -107,6 +107,7 @@ void APrimalForceCharacter::Look(const FInputActionValue& Value)
 
 void APrimalForceCharacter::Shoot(const FInputActionValue& Value)
 {
+	
 	currentGun->PullTrigger();
 }
 

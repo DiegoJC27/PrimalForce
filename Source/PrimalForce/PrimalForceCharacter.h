@@ -72,6 +72,7 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 	
+	UFUNCTION(BlueprintCallable)
 	void Shoot(const FInputActionValue& Value);
 
 public:
@@ -94,7 +95,7 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGun> gunClass;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	AGun* currentGun;
 
 public:
