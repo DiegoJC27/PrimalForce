@@ -12,11 +12,11 @@ AGun::AGun()
 	rootComp = CreateDefaultSubobject<USceneComponent>(TEXT("Scene Root"));
 	SetRootComponent(rootComp);
 
-	skMeshComp = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
-	skMeshComp->SetupAttachment(rootComp);
+	stMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	stMeshComp->SetupAttachment(rootComp);
 
 	muzzle = CreateDefaultSubobject<USceneComponent>(TEXT("BulletSpawnPoin"));
-	muzzle->SetupAttachment(skMeshComp);
+	muzzle->SetupAttachment(stMeshComp);
 
 }
 

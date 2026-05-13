@@ -23,7 +23,7 @@ void ARaycastGun::PullTrigger()
 		FRotator viewPointRotation;
 		ownerController->GetPlayerViewPoint(viewPointLocation, viewPointRotation);
 
-		DrawDebugCamera(GetWorld(), viewPointLocation, viewPointRotation, 90, 2, FColor::Red, true);
+		//DrawDebugCamera(GetWorld(), viewPointLocation, viewPointRotation, 90, 2, FColor::Red, true);
 
 		FVector endPoint = viewPointLocation + (viewPointRotation.Vector() * maxRange);
 

@@ -42,9 +42,10 @@ protected:
 	/** Input mapping context setup */
 	virtual void SetupInputComponent() override;
 
+public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UPlayerHUD> HUDClass;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	UPlayerHUD* HUDWidget;
 };

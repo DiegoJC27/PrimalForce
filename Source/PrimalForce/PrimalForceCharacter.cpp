@@ -78,7 +78,10 @@ void APrimalForceCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	//GetMesh()->HideBoneByName("gun", EPhysBodyOp::PBO_None);
-	currentGun = GetWorld()->SpawnActor<AGun>(gunClass);
+	//raycastGunReference = GetWorld()->SpawnActor<AGun>(raycastGunClass);
+	//bulletGunReference = GetWorld()->SpawnActor<AGun>(bulletGunClass);
+	currentGun = GetWorld()->SpawnActor<AGun>(bulletGunClass);
+	//SetCurrentGun(raycastGunReference);
 
 	if (currentGun) {
 		currentGun->SetOwner(this);
@@ -107,6 +110,7 @@ void APrimalForceCharacter::Look(const FInputActionValue& Value)
 
 void APrimalForceCharacter::Shoot(const FInputActionValue& Value)
 {
+	
 	currentGun->PullTrigger();
 }
 
@@ -150,4 +154,17 @@ void APrimalForceCharacter::DoJumpEnd()
 {
 	// signal the character to stop jumping
 	StopJumping();
+}
+
+void APrimalForceCharacter::SetCurrentGun(AGun* gunReference)
+{
+	currentGun = gunReference;
+}
+
+void APrimalForceCharacter::UpdateHealthBar(float percent)
+{
+	APrimalForcePlayerController* playerController = Cast<APrimalForcePlayerController>(GetController());
+	if (playerController) {
+		playerController->HUDWidget->SetHealthPercent(percent);
+	}
 }

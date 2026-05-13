@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Gun.h"
+#include "PrimalForcePlayerController.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "PrimalForceCharacter.generated.h"
@@ -72,6 +73,7 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 	
+	UFUNCTION(BlueprintCallable)
 	void Shoot(const FInputActionValue& Value);
 
 public:
@@ -93,10 +95,22 @@ public:
 	virtual void DoJumpEnd();
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<AGun> gunClass;
+	TSubclassOf<AGun> raycastGunClass;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AGun> bulletGunClass;
 	UPROPERTY(VisibleAnywhere)
+	AGun* raycastGunReference;
+	UPROPERTY(VisibleAnywhere)
+	AGun* bulletGunReference;
+
+	UFUNCTION(BlueprintCallable)
+	void SetCurrentGun(AGun* gunReference);
+
+	UPROPERTY(EditAnywhere)
 	AGun* currentGun;
 
+	UFUNCTION(BlueprintCallable)
+	void UpdateHealthBar(float percent);
 public:
 
 	/** Returns CameraBoom subobject **/

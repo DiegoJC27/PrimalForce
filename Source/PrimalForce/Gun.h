@@ -19,7 +19,7 @@ public:
 	USceneComponent* rootComp;
 
 	UPROPERTY(VisibleAnywhere)
-	USkeletalMeshComponent* skMeshComp;
+	UStaticMeshComponent* stMeshComp;
 
 	AController* ownerController;
 
