@@ -9,7 +9,6 @@ ASpiderSpawneer::ASpiderSpawneer()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	ActorPool_Spider = CreateDefaultSubobject<UActorPool>(TEXT("Pool Spiders"));
-	ActorPool_Spider->RegisterComponent();
 }
 
 void ASpiderSpawneer::SpawnSpider()
@@ -33,7 +32,7 @@ void ASpiderSpawneer::BeginPlay()
 	Super::BeginPlay();
 	if (ActorPool_Spider != nullptr) {
 		UE_LOG(LogTemp, Warning, TEXT("No es nulo"));
-		ActorPool_Spider->ForceInitialize();
+		//ActorPool_Spider->ForceInitialize();
 	}
 }
 
