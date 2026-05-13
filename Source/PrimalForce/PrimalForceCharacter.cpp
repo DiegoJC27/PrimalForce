@@ -78,7 +78,10 @@ void APrimalForceCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	//GetMesh()->HideBoneByName("gun", EPhysBodyOp::PBO_None);
-	currentGun = GetWorld()->SpawnActor<AGun>(gunClass);
+	//raycastGunReference = GetWorld()->SpawnActor<AGun>(raycastGunClass);
+	//bulletGunReference = GetWorld()->SpawnActor<AGun>(bulletGunClass);
+	currentGun = GetWorld()->SpawnActor<AGun>(bulletGunClass);
+	//SetCurrentGun(raycastGunReference);
 
 	if (currentGun) {
 		currentGun->SetOwner(this);
@@ -151,4 +154,9 @@ void APrimalForceCharacter::DoJumpEnd()
 {
 	// signal the character to stop jumping
 	StopJumping();
+}
+
+void APrimalForceCharacter::SetCurrentGun(AGun* gunReference)
+{
+	currentGun = gunReference;
 }

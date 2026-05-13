@@ -94,10 +94,19 @@ public:
 	virtual void DoJumpEnd();
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<AGun> gunClass;
+	TSubclassOf<AGun> raycastGunClass;
 	UPROPERTY(EditAnywhere)
-	AGun* currentGun;
+	TSubclassOf<AGun> bulletGunClass;
+	UPROPERTY(VisibleAnywhere)
+	AGun* raycastGunReference;
+	UPROPERTY(VisibleAnywhere)
+	AGun* bulletGunReference;
 
+	UFUNCTION(BlueprintCallable)
+	void SetCurrentGun(AGun* gunReference);
+
+	UPROPERTY(VisibleAnywhere)
+	AGun* currentGun;
 public:
 
 	/** Returns CameraBoom subobject **/
