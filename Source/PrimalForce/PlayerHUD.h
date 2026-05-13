@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/ProgressBar.h"
 #include "PlayerHUD.generated.h"
 
 /**
@@ -13,5 +14,9 @@ UCLASS()
 class PRIMALFORCE_API UPlayerHUD : public UUserWidget
 {
 	GENERATED_BODY()
-	
+public:
+	UPROPERTY(EditAnywhere, meta = (BindWidget))
+	UProgressBar* HealthBar;
+
+	void SetHealthPercent(float value);
 };

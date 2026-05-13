@@ -160,3 +160,11 @@ void APrimalForceCharacter::SetCurrentGun(AGun* gunReference)
 {
 	currentGun = gunReference;
 }
+
+void APrimalForceCharacter::UpdateHealthBar(float percent)
+{
+	APrimalForcePlayerController* playerController = Cast<APrimalForcePlayerController>(GetController());
+	if (playerController) {
+		playerController->HUDWidget->SetHealthPercent(percent);
+	}
+}

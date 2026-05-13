@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Gun.h"
+#include "PrimalForcePlayerController.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "PrimalForceCharacter.generated.h"
@@ -105,8 +106,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetCurrentGun(AGun* gunReference);
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	AGun* currentGun;
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateHealthBar(float percent);
 public:
 
 	/** Returns CameraBoom subobject **/
