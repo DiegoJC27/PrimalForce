@@ -16,7 +16,7 @@ class PRIMALFORCE_API ASpiderSpawneer : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ASpiderSpawneer();
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere)
 	UActorPool* ActorPool_Spider;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<AActor*> SpawnPoints;

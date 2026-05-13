@@ -13,7 +13,9 @@ ASpiderSpawneer::ASpiderSpawneer()
 
 void ASpiderSpawneer::SpawnSpider()
 {
-	if (ActorPool_Spider == nullptr || SpawnPoints.Num() == 0) return;
+	if (ActorPool_Spider == nullptr || SpawnPoints.Num() == 0) {
+		UE_LOG(LogTemp, Warning, TEXT("SpawnPoint es NULL o spider"));
+	}
 
 	AActor* Spider = ActorPool_Spider->GetActorFromPool();
 
@@ -22,7 +24,7 @@ void ASpiderSpawneer::SpawnSpider()
 	Spider->SetActorLocationAndRotation(SpawnPoints[rand]->GetActorLocation(),SpawnPoints[rand]->GetActorRotation());
 
 	if (Spider->Implements<UIPooled>()) {
-		IIPooled::Execute_OnSpawn(Spider, GetOwner());
+		IIPooled::Execute_OnSpawn(Spider, this->GetOwner());
 	}
 }
 
