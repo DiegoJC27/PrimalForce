@@ -22,6 +22,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UActorPool* ActorPool_Proyectiles;
+	
 
 protected:
 	virtual void BeginPlay() override;

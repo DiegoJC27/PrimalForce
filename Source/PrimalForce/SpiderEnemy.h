@@ -20,6 +20,11 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
+	UPROPERTY(EditAnywhere)
+	float health;
+	UPROPERTY(EditAnywhere)
+	float damage;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
