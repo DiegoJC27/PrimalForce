@@ -6,6 +6,7 @@
 #include "Gun.h"
 #include "PrimalForcePlayerController.h"
 #include "GameFramework/Character.h"
+#include "ActorUtilities.h"
 #include "Logging/LogMacros.h"
 #include "PrimalForceCharacter.generated.h"
 
@@ -52,7 +53,10 @@ protected:
 	UInputAction* MouseLookAction;
 	
 	UPROPERTY(EditAnywhere, Category="Input")
-	UInputAction* ShootAction;
+	UInputAction* RaycastShootAction;
+
+	UPROPERTY(EditAnywhere, Category="Input")
+	UInputAction* BulletShootAction;
 
 public:
 
@@ -74,7 +78,9 @@ protected:
 	void Look(const FInputActionValue& Value);
 	
 	UFUNCTION(BlueprintCallable)
-	void Shoot(const FInputActionValue& Value);
+	void ShootBullet(const FInputActionValue& Value);
+	UFUNCTION(BlueprintCallable)
+	void ShootRaycast(const FInputActionValue& Value);
 
 public:
 
@@ -103,11 +109,8 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	AGun* bulletGunReference;
 
-	UFUNCTION(BlueprintCallable)
-	void SetCurrentGun(AGun* gunReference);
-
-	UPROPERTY(EditAnywhere)
-	AGun* currentGun;
+	UPROPERTY(VisibleAnywhere)
+	bool isAttacking{ false };
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateHealthBar(float percent);

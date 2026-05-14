@@ -28,6 +28,7 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* muzzle;
 
+	void SetHidden(bool hide);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

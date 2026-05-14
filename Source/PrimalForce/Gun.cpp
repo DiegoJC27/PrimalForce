@@ -24,6 +24,12 @@ void AGun::PullTrigger()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Disparo"));
 }
+void AGun::SetHidden(bool hide)
+{
+	SetActorHiddenInGame(hide);
+	SetActorTickEnabled(!hide);
+	SetActorEnableCollision(!hide);
+}
 
 // Called when the game starts or when spawned
 void AGun::BeginPlay()
