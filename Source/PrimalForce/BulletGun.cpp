@@ -5,13 +5,18 @@
 
 void ABulletGun::PullTrigger()
 {
-	UE_LOG(LogTemp, Display, TEXT("Se llama PullTrigger"));
 	AActor* rock = myRockPool->GetActorFromPool();
 	rock->SetActorLocation(muzzle->GetComponentLocation());
 	if (rock->Implements<UIPooled>()) {
 		IIPooled::Execute_OnSpawn(rock, GetOwner());
 		IIPooled::Execute_LifeTime(rock, 5.0f);
 	}
+	stMeshComp->SetVisibility(false);
+}
+
+void ABulletGun::GrabRock()
+{
+	stMeshComp->SetVisibility(true);
 }
 
 void ABulletGun::BeginPlay()

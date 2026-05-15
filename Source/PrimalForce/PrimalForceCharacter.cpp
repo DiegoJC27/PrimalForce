@@ -66,8 +66,8 @@ void APrimalForceCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APrimalForceCharacter::Look);
 		// Shooting
-		EnhancedInputComponent->BindAction(RaycastShootAction, ETriggerEvent::Started, this, &APrimalForceCharacter::ShootRaycast);
-		EnhancedInputComponent->BindAction(BulletShootAction, ETriggerEvent::Started, this, &APrimalForceCharacter::ShootBullet);
+		//EnhancedInputComponent->BindAction(RaycastShootAction, ETriggerEvent::Started, this, &APrimalForceCharacter::ShootRaycast);
+		//EnhancedInputComponent->BindAction(BulletShootAction, ETriggerEvent::Started, this, &APrimalForceCharacter::ShootBullet);
 	}
 	else
 	{
@@ -112,15 +112,25 @@ void APrimalForceCharacter::Look(const FInputActionValue& Value)
 	DoLook(LookAxisVector.X, LookAxisVector.Y);
 }
 
-void APrimalForceCharacter::ShootRaycast(const FInputActionValue& Value)
+void APrimalForceCharacter::ShootRaycast()
 {
-	if(!isAttacking)
+	if (!isAttacking) {
 		raycastGunReference->PullTrigger();
+		isAttacking = true;
+	}
+
 }
-void APrimalForceCharacter::ShootBullet(const FInputActionValue& Value)
+void APrimalForceCharacter::ShootBullet()
 {
-	if(!isAttacking)
-		bulletGunReference->PullTrigger();
+	if (!isAttacking) {
+		if(hasRock)
+			bulletGunReference->PullTrigger();
+		else 
+			Cast<ABulletGun>(bulletGunReference)->GrabRock();		
+
+		isAttacking = true;
+
+	}
 }
 
 void APrimalForceCharacter::DoMove(float Right, float Forward)
@@ -171,4 +181,14 @@ void APrimalForceCharacter::UpdateHealthBar(float percent)
 	if (playerController) {
 		playerController->HUDWidget->SetHealthPercent(percent);
 	}
+}
+
+void APrimalForceCharacter::SetAttacking(bool attacking)
+{
+	isAttacking = attacking;
+}
+
+bool APrimalForceCharacter::getHasRock()
+{
+	return hasRock;
 }

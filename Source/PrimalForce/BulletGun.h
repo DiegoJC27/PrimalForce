@@ -22,6 +22,8 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UActorPool* myRockPool;
 
+	void GrabRock();
+
 protected:
 	virtual void BeginPlay() override;
 };

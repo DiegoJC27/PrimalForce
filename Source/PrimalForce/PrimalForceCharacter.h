@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Gun.h"
+#include "BulletGun.h"
 #include "PrimalForcePlayerController.h"
 #include "GameFramework/Character.h"
 #include "ActorUtilities.h"
@@ -78,9 +79,9 @@ protected:
 	void Look(const FInputActionValue& Value);
 	
 	UFUNCTION(BlueprintCallable)
-	void ShootBullet(const FInputActionValue& Value);
+	void ShootBullet();
 	UFUNCTION(BlueprintCallable)
-	void ShootRaycast(const FInputActionValue& Value);
+	void ShootRaycast();
 
 public:
 
@@ -110,10 +111,18 @@ public:
 	AGun* bulletGunReference;
 
 	UPROPERTY(VisibleAnywhere)
+	bool hasRock{ true };
+
+	UPROPERTY(VisibleAnywhere)
 	bool isAttacking{ false };
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateHealthBar(float percent);
+	
+	UFUNCTION(BlueprintCallable)
+	void SetAttacking(bool attacking);
+	UFUNCTION(BlueprintCallable)
+	bool getHasRock();
 public:
 
 	/** Returns CameraBoom subobject **/
