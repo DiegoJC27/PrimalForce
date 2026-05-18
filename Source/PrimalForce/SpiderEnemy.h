@@ -25,6 +25,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	float damage;
 
+	void Attack();
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
