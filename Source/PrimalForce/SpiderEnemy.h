@@ -24,6 +24,10 @@ public:
 	float health;
 	UPROPERTY(EditAnywhere)
 	float damage;
+	UPROPERTY(EditAnywhere)
+	float maxHealth = 100;
+	UPROPERTY(BlueprintReadWrite)
+	bool isAlive = true;
 
 	void Attack();
 	// Called every frame
