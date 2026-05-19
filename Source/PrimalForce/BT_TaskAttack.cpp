@@ -9,9 +9,9 @@ UBT_TaskAttack::UBT_TaskAttack()
 
 EBTNodeResult::Type UBT_TaskAttack::ExecuteTask(UBehaviorTreeComponent& root, uint8* nodeMemory)
 {
-	//Super::ExecuteTask(root, nodeMemory);
+	Super::ExecuteTask(root, nodeMemory);
 
-	//ASpiderAI* controller = Cast<ASpiderAI>(root.GetAIOwner());
+	ASpiderAI* controller = Cast<ASpiderAI>(root.GetAIOwner());
 	//ASpiderEnemy* character = controller->GetMyCha
 
 	return EBTNodeResult::Failed;
