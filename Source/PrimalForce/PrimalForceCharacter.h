@@ -4,8 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Gun.h"
+#include "BulletGun.h"
 #include "PrimalForcePlayerController.h"
 #include "GameFramework/Character.h"
+#include "ActorUtilities.h"
 #include "Logging/LogMacros.h"
 #include "PrimalForceCharacter.generated.h"
 
@@ -52,7 +54,10 @@ protected:
 	UInputAction* MouseLookAction;
 	
 	UPROPERTY(EditAnywhere, Category="Input")
-	UInputAction* ShootAction;
+	UInputAction* RaycastShootAction;
+
+	UPROPERTY(EditAnywhere, Category="Input")
+	UInputAction* BulletShootAction;
 
 public:
 
@@ -74,7 +79,9 @@ protected:
 	void Look(const FInputActionValue& Value);
 	
 	UFUNCTION(BlueprintCallable)
-	void Shoot(const FInputActionValue& Value);
+	void ShootBullet();
+	UFUNCTION(BlueprintCallable)
+	void ShootRaycast();
 
 public:
 
@@ -103,14 +110,19 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	AGun* bulletGunReference;
 
-	UFUNCTION(BlueprintCallable)
-	void SetCurrentGun(AGun* gunReference);
+	UPROPERTY(VisibleAnywhere)
+	bool hasRock{ true };
 
-	UPROPERTY(EditAnywhere)
-	AGun* currentGun;
+	UPROPERTY(VisibleAnywhere)
+	bool isAttacking{ false };
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateHealthBar(float percent);
+	
+	UFUNCTION(BlueprintCallable)
+	void SetAttacking(bool attacking);
+	UFUNCTION(BlueprintCallable)
+	bool getHasRock();
 public:
 
 	/** Returns CameraBoom subobject **/

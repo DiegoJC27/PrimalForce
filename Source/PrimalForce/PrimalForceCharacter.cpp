@@ -66,7 +66,8 @@ void APrimalForceCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APrimalForceCharacter::Look);
 		// Shooting
-		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Started, this, &APrimalForceCharacter::Shoot);
+		//EnhancedInputComponent->BindAction(RaycastShootAction, ETriggerEvent::Started, this, &APrimalForceCharacter::ShootRaycast);
+		//EnhancedInputComponent->BindAction(BulletShootAction, ETriggerEvent::Started, this, &APrimalForceCharacter::ShootBullet);
 	}
 	else
 	{
@@ -77,16 +78,19 @@ void APrimalForceCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 void APrimalForceCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	//GetMesh()->HideBoneByName("gun", EPhysBodyOp::PBO_None);
-	//raycastGunReference = GetWorld()->SpawnActor<AGun>(raycastGunClass);
-	//bulletGunReference = GetWorld()->SpawnActor<AGun>(bulletGunClass);
-	currentGun = GetWorld()->SpawnActor<AGun>(bulletGunClass);
-	//SetCurrentGun(raycastGunReference);
 
-	if (currentGun) {
-		currentGun->SetOwner(this);
-		currentGun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("gunSocket"));
-		currentGun->ownerController = GetController();
+	raycastGunReference = GetWorld()->SpawnActor<AGun>(raycastGunClass);
+	bulletGunReference = GetWorld()->SpawnActor<AGun>(bulletGunClass);
+	//currentGun = GetWorld()->SpawnActor<AGun>(bulletGunClass);
+
+	if (raycastGunReference && bulletGunReference) {
+		raycastGunReference->SetOwner(this);
+		raycastGunReference->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("rgunSocket"));
+		raycastGunReference->ownerController = GetController();
+
+		bulletGunReference->SetOwner(this);
+		bulletGunReference->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("bgunSocket"));
+		bulletGunReference->ownerController = GetController();
 	}
 }
 
@@ -108,10 +112,25 @@ void APrimalForceCharacter::Look(const FInputActionValue& Value)
 	DoLook(LookAxisVector.X, LookAxisVector.Y);
 }
 
-void APrimalForceCharacter::Shoot(const FInputActionValue& Value)
+void APrimalForceCharacter::ShootRaycast()
 {
-	
-	currentGun->PullTrigger();
+	if (!isAttacking) {
+		raycastGunReference->PullTrigger();
+		isAttacking = true;
+	}
+
+}
+void APrimalForceCharacter::ShootBullet()
+{
+	if (!isAttacking) {
+		if(hasRock)
+			bulletGunReference->PullTrigger();
+		else 
+			Cast<ABulletGun>(bulletGunReference)->GrabRock();		
+
+		isAttacking = true;
+
+	}
 }
 
 void APrimalForceCharacter::DoMove(float Right, float Forward)
@@ -156,15 +175,20 @@ void APrimalForceCharacter::DoJumpEnd()
 	StopJumping();
 }
 
-void APrimalForceCharacter::SetCurrentGun(AGun* gunReference)
-{
-	currentGun = gunReference;
-}
-
 void APrimalForceCharacter::UpdateHealthBar(float percent)
 {
 	APrimalForcePlayerController* playerController = Cast<APrimalForcePlayerController>(GetController());
 	if (playerController) {
 		playerController->HUDWidget->SetHealthPercent(percent);
 	}
+}
+
+void APrimalForceCharacter::SetAttacking(bool attacking)
+{
+	isAttacking = attacking;
+}
+
+bool APrimalForceCharacter::getHasRock()
+{
+	return hasRock;
 }
