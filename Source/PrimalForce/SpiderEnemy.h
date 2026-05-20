@@ -29,6 +29,9 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	bool isAlive = true;
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAnimMontage* attackMontage;
+
 	void Attack();
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

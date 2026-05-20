@@ -12,7 +12,12 @@ EBTNodeResult::Type UBT_TaskAttack::ExecuteTask(UBehaviorTreeComponent& root, ui
 	Super::ExecuteTask(root, nodeMemory);
 
 	ASpiderAI* controller = Cast<ASpiderAI>(root.GetAIOwner());
-	//ASpiderEnemy* character = controller->GetMyCha
+	ASpiderEnemy* spider = controller->GetSpiderCharacter();
+
+	if (controller->GetSpiderCharacter()->isAlive) {
+		spider->Attack();
+		return EBTNodeResult::Succeeded;
+	}
 
 	return EBTNodeResult::Failed;
 }
