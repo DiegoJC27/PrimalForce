@@ -8,7 +8,11 @@ ATowerDefense::ATowerDefense()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	rootComp = CreateDefaultSubobject<USceneComponent>(TEXT("Scene Root"));
+	SetRootComponent(rootComp);
 
+	stMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	stMeshComp->SetupAttachment(rootComp);
 }
 
 // Called when the game starts or when spawned

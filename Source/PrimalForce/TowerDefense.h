@@ -14,7 +14,11 @@ class PRIMALFORCE_API ATowerDefense : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ATowerDefense();
+	UPROPERTY(VisibleAnywhere)
+	USceneComponent* rootComp;
 
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* stMeshComp;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
