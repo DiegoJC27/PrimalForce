@@ -32,3 +32,15 @@ void ASpiderEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 }
 
+void ASpiderEnemy::Attack() {
+	if (!isAlive) return;
+	if (!attackMontage) return;
+
+	UAnimInstance* animInstance = GetMesh()->GetAnimInstance();
+	if (!animInstance) return;
+
+	if (animInstance->Montage_IsPlaying(attackMontage)) return;
+
+	animInstance->Montage_Play(attackMontage);
+
+}
