@@ -13,8 +13,10 @@ void UBTServiceDefenseLocation::TickNode(UBehaviorTreeComponent& ownerComp, uint
 	Super::TickNode(ownerComp, nodeMemory, deltaSeconds);
 
 	ASpiderAI* controller = Cast<ASpiderAI>(ownerComp.GetAIOwner());
+	if (!controller) return;
 
 	ASpiderEnemy* spider = controller->GetSpiderCharacter();
+	if (!spider) return;
 
 	UWorld* World = spider->GetWorld();
 	if (!World) return;

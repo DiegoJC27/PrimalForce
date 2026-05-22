@@ -7,6 +7,7 @@ void ASpiderAI::BeginPlay()
 {
 	Super::BeginPlay();
 	player = Cast<APrimalForceCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+	StartBehaiviourTree(player);
 }
 
 void ASpiderAI::Tick(float deltaSeconds)
@@ -21,6 +22,7 @@ void ASpiderAI::StartBehaiviourTree(APrimalForceCharacter* character)
 		spider = Cast<ASpiderEnemy>(GetPawn());
 		player = character;
 
+		if (!player) return;
 		RunBehaviorTree(enemyTree);
 		if (character || player) {
 			UBlackboardComponent* blackboardComp = GetBlackboardComponent();
