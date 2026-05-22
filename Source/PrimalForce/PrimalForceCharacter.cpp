@@ -123,10 +123,14 @@ void APrimalForceCharacter::ShootRaycast()
 void APrimalForceCharacter::ShootBullet()
 {
 	if (!isAttacking) {
-		if(hasRock)
+		if (hasRock) {
 			bulletGunReference->PullTrigger();
-		else 
+			hasRock = false;
+		}
+		else {
 			Cast<ABulletGun>(bulletGunReference)->GrabRock();		
+			hasRock = true;
+		}
 
 		isAttacking = true;
 
