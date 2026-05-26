@@ -23,4 +23,8 @@ public:
 
 	virtual void TickNode(UBehaviorTreeComponent& ownerComp, uint8* nodeMemory, float deltaSeconds) override;
 
+	UPROPERTY()
+	ASpiderAI* controller;
+	UPROPERTY()
+	ASpiderEnemy* spider;
 };
