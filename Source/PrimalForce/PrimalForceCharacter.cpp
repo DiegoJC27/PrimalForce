@@ -114,27 +114,19 @@ void APrimalForceCharacter::Look(const FInputActionValue& Value)
 
 void APrimalForceCharacter::ShootRaycast()
 {
-	if (!isAttacking) {
-		raycastGunReference->PullTrigger();
-		isAttacking = true;
-	}
-
+	raycastGunReference->PullTrigger();
 }
 void APrimalForceCharacter::ShootBullet()
 {
-	if (!isAttacking) {
-		if (hasRock) {
-			bulletGunReference->PullTrigger();
-			hasRock = false;
-		}
-		else {
-			Cast<ABulletGun>(bulletGunReference)->GrabRock();		
-			hasRock = true;
-		}
-
-		isAttacking = true;
-
+	if (hasRock) {
+		bulletGunReference->PullTrigger();
+		hasRock = false;
 	}
+	else {
+		Cast<ABulletGun>(bulletGunReference)->GrabRock();		
+		hasRock = true;
+	}
+
 }
 
 void APrimalForceCharacter::DoMove(float Right, float Forward)

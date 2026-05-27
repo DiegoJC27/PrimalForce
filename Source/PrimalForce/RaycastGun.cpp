@@ -36,7 +36,8 @@ void ARaycastGun::PullTrigger()
 		if (isHit) {
 			DrawDebugSphere(GetWorld(), hit.ImpactPoint, 10, 8, FColor::Blue, true);
 			AActor* other = hit.GetActor();
-			//other->GetComponent
+			
+			//other->FindComponentByTag();
 		}
 	}
 }

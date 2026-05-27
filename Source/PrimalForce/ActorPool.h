@@ -36,6 +36,7 @@ protected:
 
 public:
 	// Called every frame
+	UFUNCTION(BlueprintCallable)
 	void ForceInitialize();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 

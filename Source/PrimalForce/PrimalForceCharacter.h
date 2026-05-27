@@ -117,6 +117,9 @@ public:
 	bool isAttacking{ false };
 
 	UFUNCTION(BlueprintCallable)
+	bool getIsAttacking() { return isAttacking; }
+
+	UFUNCTION(BlueprintCallable)
 	void UpdateHealthBar(float percent);
 	
 	UFUNCTION(BlueprintCallable)
