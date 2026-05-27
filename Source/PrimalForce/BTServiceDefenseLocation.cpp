@@ -12,26 +12,34 @@ void UBTServiceDefenseLocation::TickNode(UBehaviorTreeComponent& ownerComp, uint
 {
 	Super::TickNode(ownerComp, nodeMemory, deltaSeconds);
 
-	if(controller == nullptr) controller = Cast<ASpiderAI>(ownerComp.GetAIOwner());
+	ASpiderAI* controller = Cast<ASpiderAI>(ownerComp.GetAIOwner());
 	
 	if (!controller) return;
 	
-	if(spider == nullptr) spider = controller->GetSpiderCharacter();
+	ASpiderEnemy* spider = controller->GetSpiderCharacter();
 	if (!spider) return;
 
 	UWorld* World = spider->GetWorld();
 	if (!World) return;
 
+	UBlackboardComponent* blackboard = controller->GetBlackboardComponent();
+	if (!blackboard) return;
+
 	TArray<AActor*> Towers;
 	UGameplayStatics::GetAllActorsOfClass(World,ATowerDefense::StaticClass(),Towers);
 
-	if (Towers.Num() == 0) return;
+	if (Towers.Num() == 0) {
+		blackboard->ClearValue(GetSelectedBlackboardKey());
+		return;
+	}
 
 	AActor* ClosestTower = nullptr;
 	float MinDistance = FLT_MAX;
 
 	for (AActor* Tower : Towers)
 	{
+		if (!IsValid(Tower)) continue;
+
 		float Distance = FVector::Dist(spider->GetActorLocation(),Tower->GetActorLocation());
 
 		if (Distance < MinDistance)
@@ -42,6 +50,10 @@ void UBTServiceDefenseLocation::TickNode(UBehaviorTreeComponent& ownerComp, uint
 	}
 	if (ClosestTower)
 	{
-		ownerComp.GetBlackboardComponent()->SetValueAsVector("TowerLocation", ClosestTower->GetActorLocation());
+		blackboard->SetValueAsVector(GetSelectedBlackboardKey(),ClosestTower->GetActorLocation());
+	}
+	else
+	{
+		blackboard->ClearValue(GetSelectedBlackboardKey());
 	}
 }

@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "ActorPool.h"
 #include "IPooled.h"
+#include "AIController.h"
+#include "BrainComponent.h"
 #include "GameFramework/Actor.h"
 #include "SpiderSpawneer.generated.h"
 
@@ -23,6 +25,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SpawnSpider();
+	void DisableSpiderIA(AActor* spider);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

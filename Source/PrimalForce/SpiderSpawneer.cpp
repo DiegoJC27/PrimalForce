@@ -28,6 +28,22 @@ void ASpiderSpawneer::SpawnSpider()
 	}
 }
 
+void ASpiderSpawneer::DisableSpiderIA(AActor* spider)
+{
+	if (!spider) return;
+
+	APawn* Pawn = Cast<APawn>(spider);
+	if (!Pawn) return;
+
+	AAIController* iaSpider = Cast<AAIController>(Pawn->GetController());
+	if (!iaSpider) return;
+
+	UBrainComponent* Brain = iaSpider->GetBrainComponent();
+	if (!Brain) return;
+
+	Brain->StopLogic(TEXT("initialized"));
+}
+
 	// Called when the game starts or when spawned
 void ASpiderSpawneer::BeginPlay()
 {
@@ -35,6 +51,10 @@ void ASpiderSpawneer::BeginPlay()
 	if (ActorPool_Spider != nullptr) {
 		UE_LOG(LogTemp, Warning, TEXT("No es nulo"));
 		//ActorPool_Spider->ForceInitialize();
+	}
+	for (AActor* Spider : ActorPool_Spider->actorPool)
+	{
+		DisableSpiderIA(Spider);
 	}
 }
 

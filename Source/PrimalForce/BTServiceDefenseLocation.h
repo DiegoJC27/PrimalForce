@@ -8,6 +8,7 @@
 #include "SpiderEnemy.h"
 #include "SpiderAI.h"
 #include "TowerDefense.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "BTServiceDefenseLocation.generated.h"
 
 /**
@@ -23,8 +24,8 @@ public:
 
 	virtual void TickNode(UBehaviorTreeComponent& ownerComp, uint8* nodeMemory, float deltaSeconds) override;
 
-	UPROPERTY()
-	ASpiderAI* controller;
-	UPROPERTY()
-	ASpiderEnemy* spider;
+	//UPROPERTY()
+	//ASpiderAI* controller;
+	//UPROPERTY()
+	//ASpiderEnemy* spider;
 };
