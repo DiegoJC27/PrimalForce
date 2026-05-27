@@ -13,6 +13,7 @@ void ASpiderAI::BeginPlay()
 void ASpiderAI::Tick(float deltaSeconds)
 {
 	Super::Tick(deltaSeconds);
+	
 }
 
 
