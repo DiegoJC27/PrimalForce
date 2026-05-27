@@ -33,6 +33,8 @@ protected:
 
 
 public:
+	UPROPERTY(EditAnywhere)
+	float detectionDistance;
 	void StartBehaiviourTree(APrimalForceCharacter* character);
 	APrimalForceCharacter* GetPlayerCharacter() const { return player; };
 	ASpiderEnemy* GetSpiderCharacter() const { return spider; };
