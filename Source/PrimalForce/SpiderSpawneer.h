@@ -6,7 +6,9 @@
 #include "ActorPool.h"
 #include "IPooled.h"
 #include "AIController.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "BrainComponent.h"
+#include "SpiderAI.h"
 #include "GameFramework/Actor.h"
 #include "SpiderSpawneer.generated.h"
 

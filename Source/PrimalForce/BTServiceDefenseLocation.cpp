@@ -52,8 +52,8 @@ void UBTServiceDefenseLocation::TickNode(UBehaviorTreeComponent& ownerComp, uint
 	{
 		blackboard->SetValueAsVector(GetSelectedBlackboardKey(),ClosestTower->GetActorLocation());
 	}
-	else
+	/*else
 	{
 		blackboard->ClearValue(GetSelectedBlackboardKey());
-	}
+	}*/
 }

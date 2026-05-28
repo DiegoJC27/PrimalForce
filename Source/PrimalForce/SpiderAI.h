@@ -24,8 +24,6 @@ protected:
 
 	APrimalForceCharacter* player;
 
-	UPROPERTY(EditAnywhere)
-	UBehaviorTree* enemyTree;
 
 	virtual void BeginPlay() override;
 
@@ -33,6 +31,8 @@ protected:
 
 
 public:
+	UPROPERTY(EditAnywhere)
+	UBehaviorTree* enemyTree;
 	UPROPERTY(EditAnywhere)
 	float detectionDistance;
 	void StartBehaiviourTree(APrimalForceCharacter* character);

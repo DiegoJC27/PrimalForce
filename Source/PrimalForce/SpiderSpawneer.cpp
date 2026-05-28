@@ -23,6 +23,16 @@ void ASpiderSpawneer::SpawnSpider()
 
 	Spider->SetActorLocationAndRotation(SpawnPoints[rand]->GetActorLocation(),SpawnPoints[rand]->GetActorRotation());
 
+	if (APawn* Pawn = Cast<APawn>(Spider))
+	{
+		if (AAIController* AI = Cast<AAIController>(Pawn->GetController()))
+		{
+			if (UBrainComponent* Brain = AI->GetBrainComponent())
+			{
+				Brain->RestartLogic();
+			}
+		}
+	}
 	if (Spider->Implements<UIPooled>()) {
 		IIPooled::Execute_OnSpawn(Spider, this->GetOwner());
 	}
