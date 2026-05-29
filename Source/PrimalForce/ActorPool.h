@@ -17,13 +17,13 @@ public:
 	// Sets default values for this component's properties
 	UActorPool();
 
-	UPROPERTY(EditAnywhere);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pool Settings");
 	int defaultSize = 10; //tamaño inicial del pool
 
-	UPROPERTY(VisibleAnywhere);
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Pool Settings");
 	TArray<AActor*> actorPool; //lista
 
-	UPROPERTY(EditAnywhere);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pool Settings");
 	TSubclassOf<AActor> actorTemplate; //el actor a instancear
 
 protected:
