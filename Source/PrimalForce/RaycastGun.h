@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Gun.h"
+#include "HealthComp.h"
 #include "RaycastGun.generated.h"
 
 /**
@@ -18,7 +19,8 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	float maxRange = 800.0f;
-
+	UPROPERTY(EditAnywhere)
+	float damage = 35.f;
 	virtual void PullTrigger() override;
 
 };

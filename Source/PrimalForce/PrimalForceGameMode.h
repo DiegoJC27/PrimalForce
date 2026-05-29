@@ -20,8 +20,11 @@ public:
 	/** Constructor */
 	APrimalForceGameMode();
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pools")
 	UActorPool* ActorPool_Proyectiles;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pools")
+	UActorPool* ActorPool_Decals;
 	
 
 protected:
