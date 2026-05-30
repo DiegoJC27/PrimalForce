@@ -126,6 +126,9 @@ public:
 	void SetAttacking(bool attacking);
 	UFUNCTION(BlueprintCallable)
 	bool getHasRock();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool hasEgg;
 public:
 
 	/** Returns CameraBoom subobject **/
