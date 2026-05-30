@@ -28,12 +28,22 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SpawnSpider();
 	void DisableSpiderIA(AActor* spider);
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	APawn* playerRef;
+
+	UPROPERTY()
+	TArray<AActor*> towers;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	UPROPERTY()
+	TArray<ASpiderAI*> ActiveSpiders;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	UFUNCTION()
+	void UpdatePlayerLocation();
 
 };

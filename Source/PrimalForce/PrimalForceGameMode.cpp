@@ -13,6 +13,7 @@ APrimalForceGameMode::APrimalForceGameMode()
 
 void APrimalForceGameMode::BeginPlay()
 {
+	Super::BeginPlay();
 	if (ActorPool_Proyectiles != nullptr) {
 		UE_LOG(LogTemp, Warning, TEXT("No es nulo"));
 		ActorPool_Proyectiles->ForceInitialize();

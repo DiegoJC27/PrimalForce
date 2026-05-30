@@ -24,11 +24,14 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnSpawn(AActor* instigator);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnDeSpawn(AActor* instigator);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void LifeTime(float time);
 
 	virtual void OnSpawn_Implementation(AActor* instigator);
+	virtual void OnDesSpawn_Implementation(AActor* instigator);
 
 	virtual void LifeTime_Implementation(float time);
 };

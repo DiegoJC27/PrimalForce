@@ -7,6 +7,10 @@ void IIPooled::OnSpawn_Implementation(AActor* instigator)
 {
 }
 
+void IIPooled::OnDesSpawn_Implementation(AActor* instigator)
+{
+}
+
 void IIPooled::LifeTime_Implementation(float time)
 {
 }

@@ -19,6 +19,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* stMeshComp;
+	UPROPERTY(VisibleAnywhere)
+	bool isAlive;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
