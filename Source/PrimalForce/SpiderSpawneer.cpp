@@ -13,29 +13,26 @@ ASpiderSpawneer::ASpiderSpawneer()
 
 void ASpiderSpawneer::SpawnSpider()
 {
-	if (ActorPool_Spider == nullptr || SpawnPoints.Num() == 0) {
-		UE_LOG(LogTemp, Warning, TEXT("SpawnPoint es NULL o spider"));
-	}
-
 	AActor* Spider = ActorPool_Spider->GetActorFromPool();
+	if (!Spider) return;
 
 	int rand = FMath::RandRange(0, SpawnPoints.Num() - 1);
-
 	Spider->SetActorLocationAndRotation(SpawnPoints[rand]->GetActorLocation(),SpawnPoints[rand]->GetActorRotation());
 
-	if (APawn* Pawn = Cast<APawn>(Spider))
+	ASpiderAI* SpiderAI = Cast<ASpiderAI>(Spider);
+	if (!SpiderAI || !playerRef) return;
+
+	SpiderAI->SetPlayerLocation(playerRef->GetActorLocation());
+
+	SpiderAI->ActivateBrain();
+
+	ActiveSpiders.Add(SpiderAI);
+
+	if (Spider->Implements<UIPooled>())
 	{
-		if (AAIController* AI = Cast<AAIController>(Pawn->GetController()))
-		{
-			if (UBrainComponent* Brain = AI->GetBrainComponent())
-			{
-				Brain->RestartLogic();
-			}
-		}
-	}
-	if (Spider->Implements<UIPooled>()) {
 		IIPooled::Execute_OnSpawn(Spider, this->GetOwner());
 	}
+
 }
 
 void ASpiderSpawneer::DisableSpiderIA(AActor* spider)
@@ -48,30 +45,43 @@ void ASpiderSpawneer::DisableSpiderIA(AActor* spider)
 	AAIController* iaSpider = Cast<AAIController>(Pawn->GetController());
 	if (!iaSpider) return;
 
-	UBrainComponent* Brain = iaSpider->GetBrainComponent();
-	if (!Brain) return;
-
-	Brain->StopLogic(TEXT("initialized"));
+	ASpiderAI* SpiderAI = Cast<ASpiderAI>(spider);
+	if (SpiderAI)
+	{
+		ActiveSpiders.Remove(SpiderAI);
+		SpiderAI->DeactivateBrain();
+	}
 }
 
-	// Called when the game starts or when spawned
 void ASpiderSpawneer::BeginPlay()
 {
 	Super::BeginPlay();
+	playerRef = GetWorld()->GetFirstPlayerController()->GetPawn();
 	if (ActorPool_Spider != nullptr) {
 		UE_LOG(LogTemp, Warning, TEXT("No es nulo"));
 		//ActorPool_Spider->ForceInitialize();
 	}
 	for (AActor* Spider : ActorPool_Spider->actorPool)
 	{
-		DisableSpiderIA(Spider);
+		if (Spider->Implements<UIPooled>()) {
+			IIPooled::Execute_OnDeSpawn(Spider, this->GetOwner());
+		}
 	}
 }
 
-// Called every frame
 void ASpiderSpawneer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ASpiderSpawneer::UpdatePlayerLocation()
+{
+	if (!playerRef) return;
+	FVector playerlocation = playerRef->GetActorLocation();
+
+	for (ASpiderAI* spider : ActiveSpiders) {
+		spider->SetPlayerLocation(playerRef->GetActorLocation());
+	}
 }
 

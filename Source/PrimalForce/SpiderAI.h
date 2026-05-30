@@ -7,6 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "SpiderEnemy.h"
 #include "PrimalForceCharacter.h"
+#include "BrainComponent.h"
 #include "BehaviorTree/blackboardComponent.h"
 #include "SpiderAI.generated.h"
 
@@ -38,4 +39,12 @@ public:
 	void StartBehaiviourTree(APrimalForceCharacter* character);
 	APrimalForceCharacter* GetPlayerCharacter() const { return player; };
 	ASpiderEnemy* GetSpiderCharacter() const { return spider; };
+	UPROPERTY()
+	FVector PlayerLocation;
+	void SetPlayerLocation(const FVector& playerPos);
+	void ActivateBrain();
+	void DeactivateBrain();
+
+	UPROPERTY(BlueprintReadWrite)
+	AActor* targetTower;
 };

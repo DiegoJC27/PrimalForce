@@ -19,7 +19,7 @@ ATowerDefense::ATowerDefense()
 void ATowerDefense::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	isAlive = true;
 }
 
 // Called every frame

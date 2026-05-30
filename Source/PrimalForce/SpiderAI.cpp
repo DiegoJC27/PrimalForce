@@ -6,8 +6,8 @@
 void ASpiderAI::BeginPlay()
 {
 	Super::BeginPlay();
-	player = Cast<APrimalForceCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
-	StartBehaiviourTree(player);
+	//player = Cast<APrimalForceCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+	//StartBehaiviourTree(player);
 }
 
 void ASpiderAI::Tick(float deltaSeconds)
@@ -32,5 +32,36 @@ void ASpiderAI::StartBehaiviourTree(APrimalForceCharacter* character)
 					GetBlackboardComponent()->SetValueAsVector("PlayerLocation", player->GetActorLocation());
 				}
 		}
+	}
+}
+
+void ASpiderAI::SetPlayerLocation(const FVector& playerPos)
+{
+	PlayerLocation = playerPos;
+
+	if (UBlackboardComponent* BB = GetBlackboardComponent())
+	{
+		BB->SetValueAsVector("PlayerLocation", PlayerLocation);
+	}
+}
+
+void ASpiderAI::ActivateBrain()
+{
+	if (enemyTree)
+	{
+		RunBehaviorTree(enemyTree);
+
+		if (UBlackboardComponent* BB = GetBlackboardComponent())
+		{
+			BB->SetValueAsVector("PlayerLocation", PlayerLocation);
+		}
+	}
+}
+
+void ASpiderAI::DeactivateBrain()
+{
+	if (UBrainComponent* brain = GetBrainComponent())
+	{
+		brain->StopLogic(TEXT("Pooled"));
 	}
 }
