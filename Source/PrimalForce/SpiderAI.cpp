@@ -19,19 +19,20 @@ void ASpiderAI::Tick(float deltaSeconds)
 
 void ASpiderAI::StartBehaiviourTree(APrimalForceCharacter* character)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Entra behaivour"));
 	if (enemyTree) {
 		spider = Cast<ASpiderEnemy>(GetPawn());
 		player = character;
 
 		if (!player) return;
 		RunBehaviorTree(enemyTree);
-		if (character || player) {
 			UBlackboardComponent* blackboardComp = GetBlackboardComponent();
 				if (blackboardComp) {
-					GetBlackboardComponent()->SetValueAsVector("StartLocation", character->GetActorLocation());
-					GetBlackboardComponent()->SetValueAsVector("PlayerLocation", player->GetActorLocation());
+					GetBlackboardComponent()->SetValueAsVector("StartLocation", spider->GetActorLocation());
+					//GetBlackboardComponent()->SetValueAsVector("PlayerLocation", player->GetActorLocation());
+					UE_LOG(LogTemp, Warning, TEXT("Inicio de behaivoir Tree"));
 				}
-		}
+		
 	}
 }
 
@@ -45,6 +46,15 @@ void ASpiderAI::SetPlayerLocation(const FVector& playerPos)
 	}
 }
 
+void ASpiderAI::SetTowerLocation(const FVector& towerPos)
+{
+	TowerLocation = towerPos;
+
+	if (UBlackboardComponent* BB = GetBlackboardComponent()) {
+		BB->SetValueAsVector("TowerLocation", TowerLocation);
+	}
+}
+
 void ASpiderAI::ActivateBrain()
 {
 	if (enemyTree)
@@ -54,6 +64,7 @@ void ASpiderAI::ActivateBrain()
 		if (UBlackboardComponent* BB = GetBlackboardComponent())
 		{
 			BB->SetValueAsVector("PlayerLocation", PlayerLocation);
+			BB->SetValueAsVector("TowerLocation", TowerLocation);
 		}
 	}
 }

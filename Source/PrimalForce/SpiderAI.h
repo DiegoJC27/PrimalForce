@@ -23,7 +23,6 @@ protected:
 
 	ASpiderEnemy* spider;
 
-	APrimalForceCharacter* player;
 
 
 	virtual void BeginPlay() override;
@@ -32,6 +31,8 @@ protected:
 
 
 public:
+	UPROPERTY(VisibleAnywhere)
+	APrimalForceCharacter* player;
 	UPROPERTY(EditAnywhere)
 	UBehaviorTree* enemyTree;
 	UPROPERTY(EditAnywhere)
@@ -41,7 +42,9 @@ public:
 	ASpiderEnemy* GetSpiderCharacter() const { return spider; };
 	UPROPERTY()
 	FVector PlayerLocation;
+	FVector TowerLocation;
 	void SetPlayerLocation(const FVector& playerPos);
+	void SetTowerLocation(const FVector& towerPos);
 	void ActivateBrain();
 	void DeactivateBrain();
 

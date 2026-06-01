@@ -13,20 +13,25 @@ ASpiderSpawneer::ASpiderSpawneer()
 
 void ASpiderSpawneer::SpawnSpider()
 {
-	AActor* Spider = ActorPool_Spider->GetActorFromPool();
+	AActor* Spider = ActorPool_Spider->GetActorFromPool(); 
 	if (!Spider) return;
 
 	int rand = FMath::RandRange(0, SpawnPoints.Num() - 1);
 	Spider->SetActorLocationAndRotation(SpawnPoints[rand]->GetActorLocation(),SpawnPoints[rand]->GetActorRotation());
+	APawn* Pawn = Cast<APawn>(Spider);
+	if (Pawn) currentAISPIDER = Pawn->GetController<ASpiderAI>();
+	
+	if (!currentAISPIDER || !playerRef) {
+		UE_LOG(LogTemp, Warning, TEXT("No Encontro una arania"));
+		return;
+	}
+	currentAISPIDER->StartBehaiviourTree(playerRef);
+	//SpiderAI->SetPlayerLocation(playerRef->GetActorLocation());
+	
 
-	ASpiderAI* SpiderAI = Cast<ASpiderAI>(Spider);
-	if (!SpiderAI || !playerRef) return;
+	//SpiderAI->ActivateBrain();
 
-	SpiderAI->SetPlayerLocation(playerRef->GetActorLocation());
-
-	SpiderAI->ActivateBrain();
-
-	ActiveSpiders.Add(SpiderAI);
+	ActiveSpiders.Add(currentAISPIDER);
 
 	if (Spider->Implements<UIPooled>())
 	{
@@ -56,32 +61,69 @@ void ASpiderSpawneer::DisableSpiderIA(AActor* spider)
 void ASpiderSpawneer::BeginPlay()
 {
 	Super::BeginPlay();
-	playerRef = GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (APawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn())
+	{
+		playerRef = Cast<APrimalForceCharacter>(PlayerPawn);
+		//UE_LOG(LogTemp, Warning, TEXT("Encontro player"));
+	}
+	if(playerRef)	UE_LOG(LogTemp, Warning, TEXT("Encontro player"));
+
 	if (ActorPool_Spider != nullptr) {
 		UE_LOG(LogTemp, Warning, TEXT("No es nulo"));
 		//ActorPool_Spider->ForceInitialize();
 	}
-	for (AActor* Spider : ActorPool_Spider->actorPool)
-	{
-		if (Spider->Implements<UIPooled>()) {
-			IIPooled::Execute_OnDeSpawn(Spider, this->GetOwner());
-		}
-	}
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATowerDefense::StaticClass(), towers);
 }
 
 void ASpiderSpawneer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-}
-
-void ASpiderSpawneer::UpdatePlayerLocation()
-{
-	if (!playerRef) return;
-	FVector playerlocation = playerRef->GetActorLocation();
-
 	for (ASpiderAI* spider : ActiveSpiders) {
-		spider->SetPlayerLocation(playerRef->GetActorLocation());
+		UpdateTowerLocation(spider);
+		//UpdatePlayerLocation(spider);
 	}
+
 }
+
+void ASpiderSpawneer::UpdatePlayerLocation(ASpiderAI* spider)
+{
+		if (!playerRef) return;
+		FVector playerlocation = playerRef->GetActorLocation();
+		spider->player;
+		spider->SetPlayerLocation(playerRef->GetActorLocation());
+
+	
+}
+
+void ASpiderSpawneer::UpdateTowerLocation(ASpiderAI* spider)
+{
+
+		spider->SetTowerLocation(playerRef->GetActorLocation());
+		if (towers.Num() == 0) {
+			return;
+		}
+
+		AActor* ClosestTower = nullptr;
+		float MinDistance = FLT_MAX;
+
+		for (AActor* Tower : towers)
+		{
+			if (!IsValid(Tower)) continue;
+			float Distance = FVector::Dist(spider->GetPawn()->GetActorLocation(), Tower->GetActorLocation());
+
+			if (Distance < MinDistance)
+			{
+				MinDistance = Distance;
+				ClosestTower = Tower;
+			}
+		}
+		if (ClosestTower)
+		{
+			spider->SetTowerLocation(ClosestTower->GetActorLocation());
+		}
+	
+}
+
+
 

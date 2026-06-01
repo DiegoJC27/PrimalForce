@@ -9,6 +9,9 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BrainComponent.h"
 #include "SpiderAI.h"
+#include "TowerDefense.h"
+#include "Kismet/GameplayStatics.h"
+#include "PrimalForceCharacter.h"
 #include "GameFramework/Actor.h"
 #include "SpiderSpawneer.generated.h"
 
@@ -18,32 +21,31 @@ class PRIMALFORCE_API ASpiderSpawneer : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
+	UPROPERTY(VisibleAnywhere)
+	ASpiderAI* currentAISPIDER;
 	ASpiderSpawneer();
 	UPROPERTY(VisibleAnywhere)
 	UActorPool* ActorPool_Spider;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<AActor*> SpawnPoints;
-
+	TSubclassOf<ASpiderAI*> spiderAIBlueprint;
 	UFUNCTION(BlueprintCallable)
 	void SpawnSpider();
 	void DisableSpiderIA(AActor* spider);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	APawn* playerRef;
+	APrimalForceCharacter* playerRef;
 
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere)
 	TArray<AActor*> towers;
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	UPROPERTY()
 	TArray<ASpiderAI*> ActiveSpiders;
 
 public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	UFUNCTION()
-	void UpdatePlayerLocation();
-
+	void UpdatePlayerLocation(ASpiderAI* spider);
+	void UpdateTowerLocation(ASpiderAI* spider);
 };

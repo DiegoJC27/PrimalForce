@@ -13,22 +13,20 @@ void UBTService_PlayerLocation::TickNode(UBehaviorTreeComponent& ownerComp, uint
 	Super::TickNode(ownerComp, nodeMemory, deltaSeconds);
 
 	ASpiderAI* controller = Cast<ASpiderAI>(ownerComp.GetAIOwner());
-	if (!controller) return;
-
-	APrimalForceCharacter* player = controller->GetPlayerCharacter();
-	if (!player) return;
+	if (!controller || !controller->GetPawn() || !controller->player) return;
 
 	UBlackboardComponent* blackboard = controller->GetBlackboardComponent();
 	if (!blackboard) return;
-	
-	float distance = FVector::Dist(controller->GetPawn()->GetActorLocation(), player->GetActorLocation());
+
+	FVector currentPlayerLoc = controller->player->GetActorLocation();
+	float distance = FVector::Dist(controller->GetPawn()->GetActorLocation(), currentPlayerLoc);
 
 	if (distance <= controller->detectionDistance) {
-		controller->SetFocus(player);
-		blackboard->SetValueAsVector(GetSelectedBlackboardKey(), player->GetActorLocation());
+		controller->SetFocus(controller->player);
+		blackboard->SetValueAsVector(GetSelectedBlackboardKey(), currentPlayerLoc);
 	}
 	else {
 		controller->ClearFocus(EAIFocusPriority::Gameplay);
-		blackboard->ClearValue(GetSelectedBlackboardKey());
+		blackboard->ClearValue(GetSelectedBlackboardKey()); // Ahora sí se mantendrá limpio
 	}
 }
