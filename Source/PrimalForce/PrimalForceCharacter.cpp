@@ -126,7 +126,10 @@ void APrimalForceCharacter::ShootBullet()
 		Cast<ABulletGun>(bulletGunReference)->GrabRock();		
 		hasRock = true;
 	}
-
+	/*APrimalForcePlayerController* playerController = Cast<APrimalForcePlayerController>(GetController());
+	if (playerController) {
+		playerController->HUDWidget->SetHasRockIcon(hasRock);
+	}*/
 }
 
 void APrimalForceCharacter::DoMove(float Right, float Forward)

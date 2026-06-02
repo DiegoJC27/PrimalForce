@@ -9,3 +9,8 @@ void UPlayerHUD::SetHealthPercent(float value)
 		HealthBar->SetPercent(value);
 	}
 }
+
+void UPlayerHUD::SetHasRockIcon(bool hasRock)
+{
+	hasRockIcon->SetRenderOpacity(hasRock);
+}

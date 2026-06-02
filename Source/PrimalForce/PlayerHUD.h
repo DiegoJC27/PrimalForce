@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/ProgressBar.h"
+#include "Components/Image.h"
 #include "PlayerHUD.generated.h"
 
 /**
@@ -17,6 +18,8 @@ class PRIMALFORCE_API UPlayerHUD : public UUserWidget
 public:
 	UPROPERTY(EditAnywhere, meta = (BindWidget))
 	UProgressBar* HealthBar;
+	UImage* hasRockIcon;
 
 	void SetHealthPercent(float value);
+	void SetHasRockIcon(bool hasRock);
 };
