@@ -84,6 +84,17 @@ void ASpiderSpawneer::Tick(float DeltaTime)
 		//UpdatePlayerLocation(spider);
 	}
 
+	//Lógica del spawn de las arañas
+	timeSinceLastSpawn += DeltaTime;
+
+	if (timeSinceLastSpawn >= spawnRate) {
+		SpawnSpider();
+		spawnRate -= normalTimeReduction;
+		
+		spawnRate = spawnRate < minimumSpawnRate ? minimumSpawnRate : spawnRate;
+		timeSinceLastSpawn = 0.f;
+	}
+
 }
 
 void ASpiderSpawneer::UpdatePlayerLocation(ASpiderAI* spider)
