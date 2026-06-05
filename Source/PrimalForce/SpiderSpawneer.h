@@ -31,6 +31,7 @@ public:
 	TSubclassOf<ASpiderAI*> spiderAIBlueprint;
 	UFUNCTION(BlueprintCallable)
 	void SpawnSpider();
+	UFUNCTION(BlueprintCallable)
 	void DisableSpiderIA(AActor* spider);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
