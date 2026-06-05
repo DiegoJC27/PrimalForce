@@ -18,6 +18,7 @@ class PRIMALFORCE_API UPlayerHUD : public UUserWidget
 public:
 	UPROPERTY(EditAnywhere, meta = (BindWidget))
 	UProgressBar* HealthBar;
+	UPROPERTY(EditAnywhere, meta = (BindWidget))
 	UImage* hasRockIcon;
 
 	void SetHealthPercent(float value);

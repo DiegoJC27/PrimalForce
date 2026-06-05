@@ -49,4 +49,20 @@ public:
 	UFUNCTION()
 	void UpdatePlayerLocation(ASpiderAI* spider);
 	void UpdateTowerLocation(ASpiderAI* spider);
+
+	//Cosas de horda
+	UPROPERTY(VisibleAnywhere)
+	float initialSpawnRate{ 5.f };
+
+	UPROPERTY(VisibleAnywhere)
+	float spawnRate{ initialSpawnRate };
+
+	UPROPERTY(VisibleAnywhere)
+	float normalTimeReduction{ 0.05f };
+
+	UPROPERTY(VisibleAnywhere)
+	float minimumSpawnRate{ 1.2f };
+
+	UPROPERTY(VisibleAnywhere)
+	float timeSinceLastSpawn{ 0.f };
 };
