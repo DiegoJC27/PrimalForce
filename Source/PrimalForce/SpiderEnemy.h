@@ -20,19 +20,23 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float health;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float damage;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float maxHealth = 100;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool isAlive = true;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UAnimMontage* attackMontage;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAnimMontage* recievingDamageMontage;
 
 	void Attack();
+	UFUNCTION(BlueprintCallable)
+	void RecieveDamage();
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

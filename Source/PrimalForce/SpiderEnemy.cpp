@@ -8,7 +8,7 @@ ASpiderEnemy::ASpiderEnemy()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	health = maxHealth;
 }
 
 // Called when the game starts or when spawned
@@ -43,4 +43,17 @@ void ASpiderEnemy::Attack() {
 
 	animInstance->Montage_Play(attackMontage);
 
+}
+
+void ASpiderEnemy::RecieveDamage()
+{
+	if (!isAlive) return;
+	if (!recievingDamageMontage) return;
+
+	UAnimInstance* animInstance = GetMesh()->GetAnimInstance();
+	if (!animInstance) return;
+
+	if (animInstance->Montage_IsPlaying(recievingDamageMontage)) return;
+
+	animInstance->Montage_Play(recievingDamageMontage);
 }
