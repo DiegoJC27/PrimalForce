@@ -47,6 +47,7 @@ public:
 	void SetPlayerLocation(const FVector& playerPos);
 	void SetTowerLocation(const FVector& towerPos);
 	void SetFirePlaceLocation(const FVector& firePos);
+	void ClearTowersValue();
 	void ActivateBrain();
 	void DeactivateBrain();
 

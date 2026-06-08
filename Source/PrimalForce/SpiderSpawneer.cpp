@@ -140,6 +140,7 @@ void ASpiderSpawneer::UpdateTowerLocation(ASpiderAI* spider)
 		for (AActor* Tower : towers)
 		{
 			if (!IsValid(Tower)) continue;
+
 			float Distance = FVector::Dist(spider->GetPawn()->GetActorLocation(), Tower->GetActorLocation());
 
 			if (Distance < MinDistance)
@@ -148,10 +149,14 @@ void ASpiderSpawneer::UpdateTowerLocation(ASpiderAI* spider)
 				ClosestTower = Tower;
 			}
 		}
-		if (ClosestTower)
+		if (!IsValid(ClosestTower) && ClosestTower)
 		{
 			spider->SetTowerLocation(ClosestTower->GetActorLocation());
 			spider->targetTower = ClosestTower;
+		}
+		else
+		{
+			spider->ClearTowersValue();
 		}
 	
 }

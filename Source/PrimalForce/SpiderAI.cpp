@@ -63,6 +63,14 @@ void ASpiderAI::SetFirePlaceLocation(const FVector& firePos)
 	}
 }
 
+void ASpiderAI::ClearTowersValue()
+{
+	if (UBlackboardComponent* BB = GetBlackboardComponent())
+	{
+		BB->ClearValue("TowerLocation");
+	}
+}
+
 void ASpiderAI::ActivateBrain()
 {
 	if (enemyTree)
