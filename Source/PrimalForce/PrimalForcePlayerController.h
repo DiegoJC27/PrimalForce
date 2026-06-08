@@ -46,6 +46,6 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UPlayerHUD> HUDClass;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UPlayerHUD* HUDWidget;
 };

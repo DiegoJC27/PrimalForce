@@ -96,20 +96,23 @@ void APrimalForceCharacter::BeginPlay()
 
 void APrimalForceCharacter::Move(const FInputActionValue& Value)
 {
-	// input is a Vector2D
-	FVector2D MovementVector = Value.Get<FVector2D>();
+	if (isAlive) {
+		// input is a Vector2D
+		FVector2D MovementVector = Value.Get<FVector2D>();
 
-	// route the input
-	DoMove(MovementVector.X, MovementVector.Y);
+		// route the input
+		DoMove(MovementVector.X, MovementVector.Y);
+	}
 }
 
 void APrimalForceCharacter::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D
-	FVector2D LookAxisVector = Value.Get<FVector2D>();
+		FVector2D LookAxisVector = Value.Get<FVector2D>();
 
-	// route the input
-	DoLook(LookAxisVector.X, LookAxisVector.Y);
+		// route the input
+		DoLook(LookAxisVector.X, LookAxisVector.Y);
+		
 }
 
 void APrimalForceCharacter::ShootRaycast()
@@ -164,8 +167,10 @@ void APrimalForceCharacter::DoLook(float Yaw, float Pitch)
 
 void APrimalForceCharacter::DoJumpStart()
 {
-	// signal the character to jump
-	Jump();
+	if (isAlive) {
+		// signal the character to jump
+		Jump();
+	}
 }
 
 void APrimalForceCharacter::DoJumpEnd()
