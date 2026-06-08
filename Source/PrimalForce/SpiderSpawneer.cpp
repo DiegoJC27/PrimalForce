@@ -149,7 +149,7 @@ void ASpiderSpawneer::UpdateTowerLocation(ASpiderAI* spider)
 				ClosestTower = Tower;
 			}
 		}
-		if (!IsValid(ClosestTower) && ClosestTower)
+		if (IsValid(ClosestTower))
 		{
 			spider->SetTowerLocation(ClosestTower->GetActorLocation());
 			spider->targetTower = ClosestTower;
