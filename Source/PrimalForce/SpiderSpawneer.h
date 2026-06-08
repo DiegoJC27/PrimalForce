@@ -24,7 +24,7 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	ASpiderAI* currentAISPIDER;
 	ASpiderSpawneer();
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UActorPool* ActorPool_Spider;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<AActor*> SpawnPoints;
