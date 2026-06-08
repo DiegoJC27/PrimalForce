@@ -108,7 +108,7 @@ void ASpiderSpawneer::UpdatePlayerLocation(ASpiderAI* spider)
 {
 		if (!playerRef) return;
 		FVector playerlocation = playerRef->GetActorLocation();
-		spider->player;
+		spider->player = playerRef;
 		spider->SetPlayerLocation(playerRef->GetActorLocation());
 
 	
@@ -117,10 +117,11 @@ void ASpiderSpawneer::UpdatePlayerLocation(ASpiderAI* spider)
 void ASpiderSpawneer::UpdateTowerLocation(ASpiderAI* spider)
 {
 
-		spider->SetTowerLocation(playerRef->GetActorLocation());
+		//spider->SetTowerLocation(playerRef->GetActorLocation());
 		if (towers.Num() == 0) {
 			return;
 		}
+		if (spider->targetTower && IsValid(spider->targetTower)) return;
 
 		AActor* ClosestTower = nullptr;
 		float MinDistance = FLT_MAX;
@@ -139,6 +140,7 @@ void ASpiderSpawneer::UpdateTowerLocation(ASpiderAI* spider)
 		if (ClosestTower)
 		{
 			spider->SetTowerLocation(ClosestTower->GetActorLocation());
+			spider->targetTower = ClosestTower;
 		}
 	
 }
