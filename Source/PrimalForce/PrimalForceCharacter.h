@@ -129,6 +129,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool hasEgg;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isAlive{ true };
 public:
 
 	/** Returns CameraBoom subobject **/
