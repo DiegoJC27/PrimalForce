@@ -29,7 +29,6 @@ void ASpiderAI::StartBehaiviourTree(APrimalForceCharacter* character)
 			UBlackboardComponent* blackboardComp = GetBlackboardComponent();
 				if (blackboardComp) {
 					GetBlackboardComponent()->SetValueAsVector("StartLocation", spider->GetActorLocation());
-					//GetBlackboardComponent()->SetValueAsVector("PlayerLocation", player->GetActorLocation());
 					UE_LOG(LogTemp, Warning, TEXT("Inicio de behaivoir Tree"));
 				}
 		
@@ -55,6 +54,15 @@ void ASpiderAI::SetTowerLocation(const FVector& towerPos)
 	}
 }
 
+void ASpiderAI::SetFirePlaceLocation(const FVector& firePos)
+{
+	FirePlaceLocation = firePos;
+
+	if (UBlackboardComponent* BB = GetBlackboardComponent()) {
+		BB->SetValueAsVector("FirePlaceLocation", FirePlaceLocation);
+	}
+}
+
 void ASpiderAI::ActivateBrain()
 {
 	if (enemyTree)
@@ -65,6 +73,7 @@ void ASpiderAI::ActivateBrain()
 		{
 			BB->SetValueAsVector("PlayerLocation", PlayerLocation);
 			BB->SetValueAsVector("TowerLocation", TowerLocation);
+			BB->SetValueAsVector("FirePlaceLocation", FirePlaceLocation);
 		}
 	}
 }

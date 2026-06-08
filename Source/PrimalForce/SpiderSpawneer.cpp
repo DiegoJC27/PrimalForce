@@ -79,6 +79,7 @@ void ASpiderSpawneer::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("No es nulo"));
 		//ActorPool_Spider->ForceInitialize();
 	}
+
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATowerDefense::StaticClass(), towers);
 }
 
@@ -88,6 +89,7 @@ void ASpiderSpawneer::Tick(float DeltaTime)
 
 	for (ASpiderAI* spider : ActiveSpiders) {
 		UpdateTowerLocation(spider);
+		UpdateFirePlaceLocation(spider);
 		//UpdatePlayerLocation(spider);
 	}
 
@@ -107,11 +109,20 @@ void ASpiderSpawneer::Tick(float DeltaTime)
 void ASpiderSpawneer::UpdatePlayerLocation(ASpiderAI* spider)
 {
 		if (!playerRef) return;
+		if (spider->firePlace) return;
 		FVector playerlocation = playerRef->GetActorLocation();
 		spider->player = playerRef;
 		spider->SetPlayerLocation(playerRef->GetActorLocation());
 
 	
+}
+
+void ASpiderSpawneer::UpdateFirePlaceLocation(ASpiderAI* spider)
+{
+	if (!firePlace) return;
+	FVector firePlaceLocation = firePlace->GetActorLocation();
+	spider->firePlace = firePlace;
+	spider->SetFirePlaceLocation(firePlace->GetActorLocation());
 }
 
 void ASpiderSpawneer::UpdateTowerLocation(ASpiderAI* spider)

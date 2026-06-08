@@ -43,11 +43,15 @@ public:
 	UPROPERTY()
 	FVector PlayerLocation;
 	FVector TowerLocation;
+	FVector FirePlaceLocation;
 	void SetPlayerLocation(const FVector& playerPos);
 	void SetTowerLocation(const FVector& towerPos);
+	void SetFirePlaceLocation(const FVector& firePos);
 	void ActivateBrain();
 	void DeactivateBrain();
 
 	UPROPERTY(BlueprintReadWrite)
 	AActor* targetTower;
+	UPROPERTY(BlueprintReadWrite)
+	AActor* firePlace;
 };

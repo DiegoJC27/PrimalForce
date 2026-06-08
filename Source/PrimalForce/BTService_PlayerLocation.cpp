@@ -27,6 +27,6 @@ void UBTService_PlayerLocation::TickNode(UBehaviorTreeComponent& ownerComp, uint
 	}
 	else {
 		controller->ClearFocus(EAIFocusPriority::Gameplay);
-		blackboard->ClearValue(GetSelectedBlackboardKey()); // Ahora sí se mantendrá limpio
+		blackboard->ClearValue(GetSelectedBlackboardKey()); 
 	}
 }

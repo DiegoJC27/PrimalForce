@@ -41,6 +41,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	TArray<AActor*> towers;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	AActor* firePlace;
 protected:
 	virtual void BeginPlay() override;
 	UPROPERTY()
@@ -50,6 +52,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	UFUNCTION()
 	void UpdatePlayerLocation(ASpiderAI* spider);
+	void UpdateFirePlaceLocation(ASpiderAI* spider);
 	void UpdateTowerLocation(ASpiderAI* spider);
 
 	//Cosas de horda
