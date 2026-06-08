@@ -87,7 +87,7 @@ void ASpiderSpawneer::Tick(float DeltaTime)
 	//Lógica del spawn de las arañas
 	timeSinceLastSpawn += DeltaTime;
 
-	if (timeSinceLastSpawn >= spawnRate) {
+	if (timeSinceLastSpawn >= spawnRate && canSpawn) {
 		SpawnSpider();
 		spawnRate -= normalTimeReduction;
 		
@@ -134,6 +134,11 @@ void ASpiderSpawneer::UpdateTowerLocation(ASpiderAI* spider)
 			spider->SetTowerLocation(ClosestTower->GetActorLocation());
 		}
 	
+}
+
+void ASpiderSpawneer::SetCanSpawn(bool can)
+{
+	canSpawn = can;
 }
 
 

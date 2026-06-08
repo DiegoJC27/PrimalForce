@@ -65,4 +65,10 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	float timeSinceLastSpawn{ 0.f };
+	
+	UPROPERTY(VisibleAnywhere)
+	bool canSpawn{ false };
+
+	UFUNCTION(BlueprintCallable)
+	void SetCanSpawn(bool can);
 };

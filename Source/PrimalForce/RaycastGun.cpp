@@ -34,7 +34,7 @@ void ARaycastGun::PullTrigger()
 
 		bool isHit = GetWorld()->LineTraceSingleByChannel(hit, viewPointLocation, endPoint, ECC_GameTraceChannel2, params);
 		if (isHit) {
-			DrawDebugSphere(GetWorld(), hit.ImpactPoint, 10, 8, FColor::Blue, true);
+			//DrawDebugSphere(GetWorld(), hit.ImpactPoint, 10, 8, FColor::Blue, true);
 			
 			AActor* hitActor = hit.GetActor();
 			if (hitActor) {
