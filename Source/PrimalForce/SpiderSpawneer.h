@@ -32,6 +32,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SpawnSpider();
 	UFUNCTION(BlueprintCallable)
+	void DeSpawnSpider(AActor* spider);
+	UFUNCTION(BlueprintCallable)
 	void DisableSpiderIA(AActor* spider);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)

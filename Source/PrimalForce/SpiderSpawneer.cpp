@@ -40,6 +40,12 @@ void ASpiderSpawneer::SpawnSpider()
 
 }
 
+void ASpiderSpawneer::DeSpawnSpider(AActor* spider)
+{
+	if (!spider) return;
+	ActorPool_Spider->HideActor(spider,true);
+}
+
 void ASpiderSpawneer::DisableSpiderIA(AActor* spider)
 {
 	if (!spider) return;
@@ -56,6 +62,7 @@ void ASpiderSpawneer::DisableSpiderIA(AActor* spider)
 		ActiveSpiders.Remove(SpiderAI);
 		SpiderAI->DeactivateBrain();
 	}
+
 }
 
 void ASpiderSpawneer::BeginPlay()

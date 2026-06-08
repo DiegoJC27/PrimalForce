@@ -32,7 +32,6 @@ protected:
 	AActor* InstancePoolActor(TSubclassOf<AActor> actorReference); //función para instancear actores
 
 	AActor* FindFirstAvailableActor(); //Regresa el primer actor desactivado que encuentre.
-	void HideActor(AActor* actorToHide, bool isHidden);
 
 public:
 	// Called every frame
@@ -42,5 +41,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	AActor* GetActorFromPool(); //Obtener un actor 
+	void HideActor(AActor* actorToHide, bool isHidden);
 
 };
