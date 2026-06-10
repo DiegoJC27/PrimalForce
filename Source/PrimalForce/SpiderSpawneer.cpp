@@ -113,8 +113,6 @@ void ASpiderSpawneer::UpdatePlayerLocation(ASpiderAI* spider)
 		FVector playerlocation = playerRef->GetActorLocation();
 		spider->player = playerRef;
 		spider->SetPlayerLocation(playerRef->GetActorLocation());
-
-	
 }
 
 void ASpiderSpawneer::UpdateFirePlaceLocation(ASpiderAI* spider)
