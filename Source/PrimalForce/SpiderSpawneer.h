@@ -63,10 +63,10 @@ public:
 	float spawnRate{ initialSpawnRate };
 
 	UPROPERTY(VisibleAnywhere)
-	float normalTimeReduction{ 0.05f };
+	float normalTimeReduction{ 0.1f };
 
 	UPROPERTY(VisibleAnywhere)
-	float minimumSpawnRate{ 1.2f };
+	float minimumSpawnRate{ 1.0f };
 
 	UPROPERTY(VisibleAnywhere)
 	float timeSinceLastSpawn{ 0.f };
